@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import RecipeForm
 from .models import Recipe
 
+
 def home(request):
     return render(request, "home.html")
 
