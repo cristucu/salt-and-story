@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import RecipeForm
 from .models import Recipe
-
 
 def home(request):
     return render(request, "home.html")
@@ -33,4 +34,24 @@ def recipe_detail(request, pk):
         request,
         "recipes/recipe_detail.html",
         {"recipe": recipe},
+    )
+
+@login_required
+def recipe_create(request):
+    if request.method == "POST":
+        form = RecipeForm(request.POST)
+
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.save()
+
+            return redirect("recipes:detail", pk=recipe.pk)
+    else:
+        form = RecipeForm()
+
+    return render(
+        request,
+        "recipes/recipe_form.html",
+        {"form": form},
     )
