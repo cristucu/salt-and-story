@@ -59,7 +59,7 @@ def recipe_create(request):
 
 @login_required
 def recipe_update(request, pk):
-    recipe = get_object_or_404(Recipe, pk=pk)
+    recipe = get_object_or_404(Recipe, pk=pk, author=request.user)
 
     if request.method == "POST":
         form = RecipeForm(request.POST, instance=recipe)
@@ -81,7 +81,7 @@ def recipe_update(request, pk):
 
 @login_required
 def recipe_delete(request, pk):
-    recipe = get_object_or_404(Recipe, pk=pk)
+    recipe = get_object_or_404(Recipe, pk=pk, author=request.user)
 
     if request.method == "POST":
         recipe.delete()
