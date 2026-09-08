@@ -12,6 +12,7 @@
 
             {% if user.is_authenticated %}
                 <span>Hello, {{ user.username }}</span>
+                <a href="{% url 'recipes:add' %}">Add Recipe</a>
 
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
                     {% csrf_token %}

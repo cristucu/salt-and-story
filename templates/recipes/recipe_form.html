@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Add Recipe | Salt & Story{% endblock %}
+
+{% block content %}
+    <h1>Add Recipe</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Save Recipe</button>
+    </form>
+{% endblock %}
