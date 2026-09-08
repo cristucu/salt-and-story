@@ -55,3 +55,26 @@ def recipe_create(request):
         "recipes/recipe_form.html",
         {"form": form},
     )
+
+
+@login_required
+def recipe_update(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+
+    if request.method == "POST":
+        form = RecipeForm(request.POST, instance=recipe)
+
+        if form.is_valid():
+            form.save()
+            return redirect("recipes:detail", pk=recipe.pk)
+    else:
+        form = RecipeForm(instance=recipe)
+
+    return render(
+        request,
+        "recipes/recipe_form.html",
+        {
+            "form": form,
+            "recipe": recipe,
+        },
+    )
