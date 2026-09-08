@@ -1,14 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}Add Recipe | Salt & Story{% endblock %}
+{% block title %}
+    {% if recipe %}
+        Edit {{ recipe.title }} | Salt & Story
+    {% else %}
+        Add Recipe | Salt & Story
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <h1>Add Recipe</h1>
+    {% if recipe %}
+        <h1>Edit Recipe</h1>
+    {% else %}
+        <h1>Add Recipe</h1>
+    {% endif %}
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
 
-        <button type="submit">Save Recipe</button>
+        <button type="submit">
+            {% if recipe %}
+                Save Changes
+            {% else %}
+                Save Recipe
+            {% endif %}
+        </button>
     </form>
 {% endblock %}

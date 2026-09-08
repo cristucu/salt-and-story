@@ -16,5 +16,9 @@
 
         <p>Cooking time: {{ recipe.cooking_time }}</p>
         <p>Added: {{ recipe.created_at }}</p>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'recipes:edit' recipe.pk %}">Edit Recipe</a>
+        {% endif %}
     </article>
 {% endblock %}
