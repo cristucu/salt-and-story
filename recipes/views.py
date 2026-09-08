@@ -78,3 +78,17 @@ def recipe_update(request, pk):
             "recipe": recipe,
         },
     )
+
+@login_required
+def recipe_delete(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+
+    if request.method == "POST":
+        recipe.delete()
+        return redirect("recipes:list")
+
+    return render(
+        request,
+        "recipes/recipe_confirm_delete.html",
+        {"recipe": recipe},
+    )
