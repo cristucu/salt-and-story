@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}All Recipes | Salt & Story{% endblock %}
+
+{% block content %}
+    <h1>All Recipes</h1>
+
+    {% if recipes %}
+        {% for recipe in recipes %}
+            <article>
+                <h2>{{ recipe.title }}</h2>
+                <p>{{ recipe.description }}</p>
+                <p>Cooking time: {{ recipe.cooking_time }}</p>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No recipes available yet.</p>
+    {% endif %}
+{% endblock %}
