@@ -2,50 +2,149 @@
 
 Salt & Story is a Django culinary recipe application developed as the final project for a Python/Django course.
 
-Version 1 focuses on the core course requirements while keeping the project structure clean enough to support future development.
+The application allows authenticated users to create and manage their own recipes, while recipes remain publicly available to visitors.
 
-## V1 Features
+## Features
 
-* User authentication
-* Custom Django user model
-* Recipe creation
-* Recipe detail page
-* Recipe editing
-* Recipe deletion
-* Recipe ownership and permissions
-* Public recipe browsing
-* Alphabetical recipe listing
-* Recipe listing by creation date
-* Homepage with latest recipes
-* Automated tests
-* SQLite database
+- User authentication
+- Custom Django user model
+- Public recipe browsing
+- Recipe creation
+- Recipe editing
+- Recipe deletion
+- Recipe ownership and access control
+- Alphabetical recipe sorting
+- Latest recipes sorting
+- Responsive user interface
+- Automated test suite
+- Automated CI checks with GitHub Actions
 
-## Technology Stack
+## Recipe Fields
 
-* Python 3.12
-* Django 5.2
-* SQLite3
-* HTML
-* CSS
-* Django Templates
+Each recipe contains:
 
-## Documentation
+- Title
+- Description
+- Ingredients
+- Instructions
+- Cooking time
+- Creation date
+- Last update date
+- Author
 
-Detailed V1 documentation is available here:
+## Pages
 
-* [Project Definition](docs/PROJECT_V1.md)
-* [Architecture](docs/ARCHITECTURE_V1.md)
+- `/` — Homepage
+- `/recipes/` — Recipes sorted alphabetically
+- `/recipes/latest/` — Recipes sorted by creation date
+- `/recipes/<id>/` — Recipe detail
+- `/recipes/add/` — Create recipe
+- `/recipes/<id>/edit/` — Edit recipe
+- `/recipes/<id>/delete/` — Delete recipe
+- `/login/` — Login
+- `/logout/` — Logout
 
-## Project Status
+## Technologies
 
-Salt & Story is currently under active development as the V1 final course project.
+- Python 3.12
+- Django 5.2
+- SQLite
+- HTML
+- CSS
+- Ruff
+- GitHub Actions
 
-The domain `saltandstory.ro` has been reserved for future deployment, but production deployment is outside the scope of V1.
 
 ## Installation
 
-Installation and local development instructions will be completed as the V1 implementation progresses.
+Clone the repository:
 
-## Testing
+```bash
+git clone git@github.com:cristucu/salt-and-story.git
+cd salt-and-story
+```
 
-The project will include automated tests covering authentication, recipe CRUD, permissions, sorting, and public recipe access.
+Create and activate a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Apply database migrations:
+
+```bash
+python manage.py migrate
+```
+Create a superuser for admin access:
+
+```bash
+python manage.py createsuperuser
+```
+Run the development server:
+
+```bash
+python manage.py runserver
+``` 
+Open your web browser and navigate to `http://127.0.0.1:8000/`
+
+## Tests
+
+Run the automated test suite:
+
+```bash
+python manage.py test
+``` 
+## Code Quality
+
+Run Ruff:
+
+```bash
+ruff check .
+```
+
+Run Django system checks:
+
+```bash
+python manage.py check
+```
+
+GitHub Actions automatically runs:
+
+- Ruff lint checks
+- Django system checks
+- Django tests
+
+on pull requests targeting `main` and on pushes to `main`.
+
+## Project Documentation
+
+Additional project documentation is available in:
+
+- `docs/PROJECT_V1.md`
+- `docs/ARCHITECTURE_V1.md`
+
+## Future Development
+
+Possible V2 improvements include:
+
+- Recipe categories
+- Recipe images
+- Comments
+- Favorites
+- Ratings
+- Collections
+- Stories and culinary blog content
+- PostgreSQL
+- Production deployment
+- Custom domain integration
+
+The domain `saltandstory.ro` has already been reserved for future deployment.
+
+
