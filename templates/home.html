@@ -3,6 +3,24 @@
 {% block title %}Home | Salt & Story{% endblock %}
 
 {% block content %}
-    <h1>Salt & Story</h1>
-    <p>Simple recipes, good food, and stories worth sharing.</p>
+    <section class="hero">
+        <p class="hero-eyebrow">Simple food. Good stories.</p>
+
+        <h1>Recipes worth coming back to.</h1>
+
+        <p class="hero-text">
+            A collection of simple, comforting recipes made to be cooked,
+            shared, and remembered.
+        </p>
+
+        <div class="hero-actions">
+            <a class="btn" href="{% url 'recipes:list' %}">
+                Explore Recipes
+            </a>
+
+            <a class="btn btn-secondary" href="{% url 'recipes:latest' %}">
+                Latest Recipes
+            </a>
+        </div>
+    </section>
 {% endblock %}
