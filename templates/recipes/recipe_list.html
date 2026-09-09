@@ -3,20 +3,30 @@
 {% block title %}All Recipes | Salt & Story{% endblock %}
 
 {% block content %}
-    <h1>All Recipes</h1>
+    <section class="page-header">
+        <p class="hero-eyebrow">Browse the collection</p>
+        <h1>All Recipes</h1>
+    </section>
 
     {% if recipes %}
-        {% for recipe in recipes %}
-            <article>
-                <h2>
-                    <a href="{% url 'recipes:detail' recipe.pk %}">
-                        {{ recipe.title }}
+        <div class="recipe-grid">
+            {% for recipe in recipes %}
+                <article class="recipe-card">
+                    <a href="{% url 'recipes:detail' recipe.pk %}" class="recipe-card-link">
+                        <h2>{{ recipe.title }}</h2>
+
+                        <p class="recipe-description">
+                            {{ recipe.description|truncatewords:20 }}
+                        </p>
+
+                        <div class="recipe-meta">
+                            <span>{{ recipe.cooking_time }}</span>
+                            <span>By {{ recipe.author.username }}</span>
+                        </div>
                     </a>
-                </h2>
-                <p>{{ recipe.description }}</p>
-                <p>Cooking time: {{ recipe.cooking_time }}</p>
-            </article>
-        {% endfor %}
+                </article>
+            {% endfor %}
+        </div>
     {% else %}
         <p>No recipes available yet.</p>
     {% endif %}

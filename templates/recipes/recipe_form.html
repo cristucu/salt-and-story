@@ -9,22 +9,31 @@
 {% endblock %}
 
 {% block content %}
-    {% if recipe %}
-        <h1>Edit Recipe</h1>
-    {% else %}
-        <h1>Add Recipe</h1>
-    {% endif %}
+    <section class="form-page">
+        <p class="hero-eyebrow">
+            {% if recipe %}Update recipe{% else %}New recipe{% endif %}
+        </p>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <button type="submit">
+        <h1>
             {% if recipe %}
-                Save Changes
+                Edit Recipe
             {% else %}
-                Save Recipe
+                Add Recipe
             {% endif %}
-        </button>
-    </form>
+        </h1>
+
+        <form method="post" class="recipe-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">
+                {% if recipe %}
+                    Save Changes
+                {% else %}
+                    Save Recipe
+                {% endif %}
+            </button>
+        </form>
+    </section>
 {% endblock %}
+

@@ -3,21 +3,32 @@
 {% block title %}Latest Recipes | Salt & Story{% endblock %}
 
 {% block content %}
-    <h1>Latest Recipes</h1>
+    <section class="page-header">
+        <p class="hero-eyebrow">Fresh from the kitchen</p>
+        <h1>Latest Recipes</h1>
+    </section>
 
     {% if recipes %}
-        {% for recipe in recipes %}
-            <article>
-                <h2>
-                    <a href="{% url 'recipes:detail' recipe.pk %}">
-                        {{ recipe.title }}
+        <div class="recipe-grid">
+            {% for recipe in recipes %}
+                <article class="recipe-card">
+                    <a href="{% url 'recipes:detail' recipe.pk %}" class="recipe-card-link">
+                        <h2>{{ recipe.title }}</h2>
+
+                        <p class="recipe-description">
+                            {{ recipe.description|truncatewords:20 }}
+                        </p>
+
+                        <div class="recipe-meta">
+                            <span>{{ recipe.cooking_time }}</span>
+                            <span>{{ recipe.created_at|date:"M d, Y" }}</span>
+                        </div>
                     </a>
-                </h2>
-                <p>{{ recipe.description }}</p>
-                <p>Added: {{ recipe.created_at }}</p>
-            </article>
-        {% endfor %}
+                </article>
+            {% endfor %}
+        </div>
     {% else %}
         <p>No recipes available yet.</p>
     {% endif %}
 {% endblock %}
+

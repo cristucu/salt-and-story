@@ -3,14 +3,29 @@
 {% block title %}Delete {{ recipe.title }} | Salt & Story{% endblock %}
 
 {% block content %}
-    <h1>Delete Recipe</h1>
+    <section class="delete-page">
+        <p class="hero-eyebrow">Delete recipe</p>
 
-    <p>Are you sure you want to delete "{{ recipe.title }}"?</p>
+        <h1>Are you sure?</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-    </form>
+        <p>
+            You are about to permanently delete
+            <strong>{{ recipe.title }}</strong>.
+        </p>
 
-    <a href="{% url 'recipes:detail' recipe.pk %}">Cancel</a>
+        <div class="delete-actions">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-danger">
+                    Yes, Delete
+                </button>
+            </form>
+
+            <a class="btn btn-secondary"
+               href="{% url 'recipes:detail' recipe.pk %}">
+                Cancel
+            </a>
+        </div>
+    </section>
 {% endblock %}
+

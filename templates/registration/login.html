@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
+{% extends "base.html" %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+{% block title %}Login | Salt & Story{% endblock %}
 
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+{% block content %}
+    <section class="form-page">
+        <p class="hero-eyebrow">Welcome back</p>
+        <h1>Login</h1>
+
+        <form method="post" class="recipe-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">Login</button>
+        </form>
+    </section>
+{% endblock %}
+

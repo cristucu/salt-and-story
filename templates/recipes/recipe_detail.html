@@ -3,23 +3,42 @@
 {% block title %}{{ recipe.title }} | Salt & Story{% endblock %}
 
 {% block content %}
-    <article>
+    <article class="recipe-detail">
+        <p class="hero-eyebrow">Recipe</p>
+
         <h1>{{ recipe.title }}</h1>
 
-        <p>{{ recipe.description }}</p>
+        <div class="recipe-detail-meta">
+            <span>{{ recipe.cooking_time }}</span>
+            <span>By {{ recipe.author.username }}</span>
+            <span>{{ recipe.created_at|date:"M d, Y" }}</span>
+        </div>
 
-        <h2>Ingredients</h2>
-        <p>{{ recipe.ingredients }}</p>
+        <p class="recipe-lead">
+            {{ recipe.description }}
+        </p>
 
-        <h2>Instructions</h2>
-        <p>{{ recipe.instructions }}</p>
+        <section class="recipe-section">
+            <h2>Ingredients</h2>
+            <p>{{ recipe.ingredients|linebreaksbr }}</p>
+        </section>
 
-        <p>Cooking time: {{ recipe.cooking_time }}</p>
-        <p>Added: {{ recipe.created_at }}</p>
+        <section class="recipe-section">
+            <h2>Instructions</h2>
+            <p>{{ recipe.instructions|linebreaksbr }}</p>
+        </section>
 
         {% if user == recipe.author %}
-                <a href="{% url 'recipes:edit' recipe.pk %}">Edit Recipe</a>
-                <a href="{% url 'recipes:delete' recipe.pk %}">Delete Recipe</a>
+            <div class="recipe-actions">
+                <a class="btn" href="{% url 'recipes:edit' recipe.pk %}">
+                    Edit Recipe
+                </a>
+
+                <a class="btn btn-danger" href="{% url 'recipes:delete' recipe.pk %}">
+                    Delete Recipe
+                </a>
+            </div>
         {% endif %}
     </article>
 {% endblock %}
+
