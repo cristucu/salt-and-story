@@ -9,6 +9,12 @@ class Recipe(models.Model):
     instructions = models.TextField()
     cooking_time = models.CharField(max_length=100)
 
+    image = models.ImageField(
+        upload_to="recipes/",
+        blank=True,
+        null=True,
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -17,6 +23,7 @@ class Recipe(models.Model):
         on_delete=models.CASCADE,
         related_name="recipes",
     )
+
 
     def __str__(self):
         return self.title

@@ -17,6 +17,7 @@ class RecipeForm(forms.ModelForm):
             "ingredients",
             "instructions",
             "cooking_time",
+            "image",
         )
 
         widgets: ClassVar[dict] = {
