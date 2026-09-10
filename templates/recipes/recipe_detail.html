@@ -3,42 +3,51 @@
 {% block title %}{{ recipe.title }} | Salt & Story{% endblock %}
 
 {% block content %}
-    <article class="recipe-detail">
-        <p class="hero-eyebrow">Recipe</p>
 
-        <h1>{{ recipe.title }}</h1>
+    {% if recipe.image %}
+        <img
+            src="{{ recipe.image.url }}"
+            alt="{{ recipe.title }}"
+            class="recipe-detail-image"
+        >
+    {% endif %}
 
-        <div class="recipe-detail-meta">
-            <span>{{ recipe.cooking_time }}</span>
-            <span>By {{ recipe.author.username }}</span>
-            <span>{{ recipe.created_at|date:"M d, Y" }}</span>
-        </div>
+        <article class="recipe-detail">
+            <p class="hero-eyebrow">Recipe</p>
 
-        <p class="recipe-lead">
-            {{ recipe.description }}
-        </p>
+            <h1>{{ recipe.title }}</h1>
 
-        <section class="recipe-section">
-            <h2>Ingredients</h2>
-            <p>{{ recipe.ingredients|linebreaksbr }}</p>
-        </section>
-
-        <section class="recipe-section">
-            <h2>Instructions</h2>
-            <p>{{ recipe.instructions|linebreaksbr }}</p>
-        </section>
-
-        {% if user == recipe.author %}
-            <div class="recipe-actions">
-                <a class="btn" href="{% url 'recipes:edit' recipe.pk %}">
-                    Edit Recipe
-                </a>
-
-                <a class="btn btn-danger" href="{% url 'recipes:delete' recipe.pk %}">
-                    Delete Recipe
-                </a>
+            <div class="recipe-detail-meta">
+                <span>{{ recipe.cooking_time }}</span>
+                <span>By {{ recipe.author.username }}</span>
+                <span>{{ recipe.created_at|date:"M d, Y" }}</span>
             </div>
-        {% endif %}
-    </article>
+
+            <p class="recipe-lead">
+                {{ recipe.description }}
+            </p>
+
+            <section class="recipe-section">
+                <h2>Ingredients</h2>
+                <p>{{ recipe.ingredients|linebreaksbr }}</p>
+            </section>
+
+            <section class="recipe-section">
+                <h2>Instructions</h2>
+                <p>{{ recipe.instructions|linebreaksbr }}</p>
+            </section>
+
+            {% if user == recipe.author %}
+                <div class="recipe-actions">
+                    <a class="btn" href="{% url 'recipes:edit' recipe.pk %}">
+                        Edit Recipe
+                    </a>
+
+                    <a class="btn btn-danger" href="{% url 'recipes:delete' recipe.pk %}">
+                        Delete Recipe
+                    </a>
+                </div>
+            {% endif %}
+        </article>
 {% endblock %}
 

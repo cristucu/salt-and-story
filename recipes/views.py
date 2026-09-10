@@ -40,7 +40,7 @@ def recipe_detail(request, pk):
 @login_required
 def recipe_create(request):
     if request.method == "POST":
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
 
         if form.is_valid():
             recipe = form.save(commit=False)
@@ -63,7 +63,7 @@ def recipe_update(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk, author=request.user)
 
     if request.method == "POST":
-        form = RecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
 
         if form.is_valid():
             form.save()
